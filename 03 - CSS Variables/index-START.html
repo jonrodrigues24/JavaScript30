@@ -22,6 +22,18 @@
 
   <style>
 
+    :root{
+      --base: #999999;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +57,19 @@
   </style>
 
   <script>
+
+    const input = document.querySelectorAll('.controls input')
+
+    function handleUpdate() {
+      // console.log(this.value);
+      const suffix = this.dataset.sizing || '';  //sizing refers to data-sizing in the html above, some dont have sizing so '' is for nothing
+      // console.log(this.name) //refers to the name in html
+      // console.log(suffix);
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    input.forEach(input => input.addEventListener('change', handleUpdate));
+    input.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
